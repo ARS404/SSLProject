@@ -1,4 +1,4 @@
-num_steps: 1000
+num_steps: 2001
 batch_size: 32
 
 defaults:

@@ -4,4 +4,4 @@ defaults:
   - logger: logger
   - train: train
   - val: val
-  - optim: adam
+  - optim: adamw
