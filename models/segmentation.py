@@ -12,5 +12,5 @@ class Segmentation(nn.Module):
 
     def forward(self, images):
         out = self.backbone(images)
-        out = self.head(images)
+        out = self.head(out)
         return out
