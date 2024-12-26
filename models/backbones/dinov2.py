@@ -8,6 +8,7 @@ class DinoV2(nn.Module):
         self.model = torch.hub.load('facebookresearch/dinov2', 'dinov2_vitl14_reg').cuda()
 
         self.reshape = reshape
+        self.freeze = freeze
 
         if freeze:
             for param in self.model.parameters():
@@ -17,4 +18,4 @@ class DinoV2(nn.Module):
         return self.model.get_intermediate_layers(images, 24, reshape=self.reshape)[-1]
     
     def get_name(self):
-        return "DinoV2"
+        return f"DinoV2 {'(frozen)' if self.freeze else ''}"
