@@ -1,4 +1,4 @@
-cross_entropy:
+dice_loss:
   _target_: train.losses.DiceLoss
 
   weight: 1.0
