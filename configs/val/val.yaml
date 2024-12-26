@@ -2,6 +2,6 @@ steps_per_val: 100
 batch_size: 16
 val_size: 32
 
-defaults:
-  - metrics:
-    - none
+# defaults:
+#   - metrics:
+#     - none
