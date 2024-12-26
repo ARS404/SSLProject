@@ -32,16 +32,15 @@ id2color = {k: list(np.random.choice(range(256), size=3)) for k,v in id2label.it
 
 def visualize_map(image, segmentation_map):
     color_seg = np.zeros(
-        (segmentation_map.shape[0], segmentation_map.shape[1], segmentation_map.shape[2], 3), 
+        (segmentation_map.shape[0], 3, segmentation_map.shape[1], segmentation_map.shape[2]), 
         dtype=np.uint8
     ) # height, width, 3
     for label, color in id2color.items():
         color_seg[segmentation_map == label, :] = color
 
     # Show image + mask
-    image = image.permute(0, 2, 3, 1)
     img = np.array(image) * 0.5 + color_seg * 0.5
-    img = img.astype(np.uint8)
+    img = img.astype(np.uint8)      # [batch, channels, h, w]
 
     return img
 
