@@ -74,9 +74,8 @@ class Trainer(object):
             config.backbone,
             config.head
         ).to("cuda")
-        # self.optimizer = AdamW(self.model.parameters(), lr=1e-3) #TODO: add parametrization
-        config.train.optim.params = self.model.parameters()
-        self.optimizer = instantiate(config.train.optim)
+
+        self.optimizer = instantiate(config.optim, params=torch.nn.Linear(10, 1).parameters())
 
         self.losses = [
             instantiate(cfg) for cfg in OmegaConf.to_container(config.train.losses).values()
