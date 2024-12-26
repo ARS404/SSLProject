@@ -33,7 +33,7 @@ class DiceLoss(object):
         intersection = torch.sum(predict * target_onehot, dim=2)  
         union = torch.sum(predict.pow(2), dim=2) + torch.sum(target_onehot, dim=2)  
         
-        dice_coef = (2 * intersection + self.smooth) / (union + self.smooth)  
+        dice_coef = (2 * intersection + 1e-5) / (union + 1e-5)  
         dice_loss = 1 - torch.mean(dice_coef)
         return dice_loss * self.weight
 
