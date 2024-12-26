@@ -4,3 +4,4 @@ batch_size: 16
 defaults:
   - losses:
     - cross_entropy
+    - dice_loss
