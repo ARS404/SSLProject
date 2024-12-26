@@ -1,0 +1,3 @@
+_target_: models.heads.upsample.Upsample
+
+num_labels: 21
