@@ -1,6 +1,6 @@
 _target_: models.heads.linear_classifier.LinearClassifier
 
 in_channels: 1024
-tokenW: 14
-tokenH: 14
+tokenW: 32
+tokenH: 32
 num_labels: 100

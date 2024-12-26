@@ -74,7 +74,6 @@ class Trainer(object):
 
 
     def run_train(self):
-
         for step in tqdm(range(self.num_steps)):
             self._train_step()
             if step % self.steps_per_val == 0:
@@ -107,10 +106,6 @@ class Trainer(object):
         self.logger.log_wandb(loss_dict)
         total_loss.backward()
         self.optimizer.step()
-
-
-        
-
 
     def _validate(self):
         pass
