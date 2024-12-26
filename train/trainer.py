@@ -80,10 +80,9 @@ class Trainer(object):
             instantiate(cfg) for cfg in OmegaConf.to_container(config.train.losses).values()
         ]
 
-        self.metrics = []
-        # self.metrics = [
-        #     instantiate(cfg) for cfg in OmegaConf.to_container(config.val.metrics).values()
-        # ]
+        self.metrics = [
+            instantiate(cfg) for cfg in OmegaConf.to_container(config.val.metrics).values()
+        ]
 
         self.logger  = instantiate(
             config.logger, run_name=f"{self.model.get_name()}"
