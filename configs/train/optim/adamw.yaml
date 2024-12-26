@@ -1,4 +1,4 @@
-defaults:
+adamw:
   - _target_: torch.optim.AdamW
 
   - lr: 0.0001

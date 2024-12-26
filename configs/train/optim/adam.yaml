@@ -1,5 +1,5 @@
-defaults:
-  - _target_: torch.optim.AdamS
+adam:
+  - _target_: torch.optim.Adam
 
   - lr: 0.0001
   - weight_decay: 0.001
