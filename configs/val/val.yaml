@@ -1,6 +1,6 @@
-steps_per_val: 100
+steps_per_val: 250
 batch_size: 16
-val_size: 32
+val_size: 16000
 
 defaults:
   - metrics:
