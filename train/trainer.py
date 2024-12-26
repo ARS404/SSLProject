@@ -115,7 +115,6 @@ class Trainer(object):
             total_loss = total_loss + loss_val
             loss_dict[f"train/{loss.get_name()}"] = loss_val
         
-
         self.logger.log_wandb(loss_dict)
         total_loss.backward()
         self.optimizer.step()
