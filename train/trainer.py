@@ -25,7 +25,7 @@ class InfiniteDataLoader(object):
             root="data", 
             download=True, 
             transform=transforms,
-            target_transform=t_transforms,
+            target_transform=transforms,
             image_set=split
         )
         self.dataloader = DataLoader(
@@ -94,7 +94,7 @@ class Trainer(object):
         batch = self.train_dataloader.__next__()
     
         pixel_values = batch[0].to("cuda")
-        labels = batch[1].to("cuda")
+        labels = batch[1].type(torch.LongTensor).to("cuda")
 
         predictions = self.model(pixel_values)
         logits = torch.nn.functional.interpolate(predictions, size=pixel_values.shape[2:], mode="bilinear", align_corners=False)
