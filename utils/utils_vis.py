@@ -4,7 +4,6 @@ import torch
 
 
 id2label = {
-    0: "background",
     1: "aeroplane", 
     2: "bicycle", 
     3: "bird", 
@@ -27,7 +26,29 @@ id2label = {
     20: "tv/monitor"
 }
 
-id2color = {k: list(np.random.choice(range(256), size=3)) for k,v in id2label.items()}
+id2color =np.array([
+    [0, 0, 0],
+    [128, 0, 0],
+    [0, 128, 0],
+    [128, 128, 0],
+    [0, 0, 128],
+    [128, 0, 128],
+    [0, 128, 128],
+    [128, 128, 128],
+    [64, 0, 0],
+    [192, 0, 0],
+    [64, 128, 0],
+    [192, 128, 0],
+    [64, 0, 128],
+    [192, 0, 128],
+    [64, 128, 128],
+    [192, 128, 128],
+    [0, 64, 0],
+    [128, 64, 0],
+    [0, 192, 0],
+    [128, 192, 0],
+    [0, 64, 128],
+])
 
 
 def visualize_map(image, segmentation_map):

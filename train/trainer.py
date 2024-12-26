@@ -124,7 +124,7 @@ class Trainer(object):
         metric_dict = {}
         for step in range(0, self.val_size, self.val_batch_size):
             batch = self.val_dataloader.__next__()
-            pixel_values = (batch[0] * 255).to("cuda")
+            pixel_values = batch[0].to("cuda")
             labels = batch[1].type(torch.LongTensor).to("cuda")
 
             predictions = self.model(pixel_values)
@@ -138,8 +138,9 @@ class Trainer(object):
 
             if step == 0:
                 color_map = logits.argmax(dim=1)
-                color_map = visualize_map(pixel_values.cpu(), color_map.squeeze().cpu())
-                image_grid = generate_grid(pixel_values.cpu(), color_map)
+                pixel_values = (pixel_values * 255).cpu()
+                color_map = visualize_map(pixel_values, color_map.squeeze().cpu())
+                image_grid = generate_grid(pixel_values, color_map)
                 image_grid = np.transpose(image_grid, (1, 2, 0))
                 image_grid = wandb.Image(image_grid)
                 metric_dict["Segmentation Map"] = image_grid
