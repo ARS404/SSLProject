@@ -15,7 +15,7 @@ class LinearClassifier(nn.Module):
         )
 
     def forward(self, embeddings):
-        # out = embeddings.reshape(-1, self.height, self.width, self.in_channels)
-        # out = out.permute(0, 3, 1, 2)
-        out = self.model(embeddings)
+        out = embeddings.reshape(-1, self.height, self.width, self.in_channels)
+        out = out.permute(0, 3, 1, 2)
+        out = self.model(out)
         return out
