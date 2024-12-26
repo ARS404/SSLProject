@@ -6,7 +6,7 @@ class MIOU(object):
         self.jaccard = JaccardIndex(task='multiclass', num_classes=num_classes, ignore_index=0).cuda()
 
     def __call__(self, logits, labels):
-        return self.jaccard(logits, labels.squeeze())
+        return self.jaccard(logits, labels.squeeze()).cpu()
     
     def get_name(self):
         return "MIOU"
