@@ -9,6 +9,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 from models.segmentation import Segmentation
+from utils.utils_vis import *
 
 
 class InfiniteDataLoader(object):
@@ -74,6 +75,10 @@ class Trainer(object):
             instantiate(cfg) for cfg in OmegaConf.to_container(config.train.losses).values()
         ]
 
+        self.metrics = [
+            instantiate(cfg) for cfg in OmegaConf.to_container(config.val.metrics).values()
+        ]
+
         self.logger  = instantiate(
             config.logger, run_name=f"{self.model.get_name()}"
         )
@@ -113,7 +118,34 @@ class Trainer(object):
         total_loss.backward()
         self.optimizer.step()
 
+    @torch.no_grad()
     def _validate(self):
-        pass
+        self.model.eval()
+
+        metric_dict = {}
+        for step in range(0, self.val_size, self.val_batch_size):
+            batch = self.val_dataloader.__next__()
+            pixel_values = batch[0].to("cuda")
+            labels = batch[1].type(torch.LongTensor).to("cuda")
+
+            predictions = self.model(pixel_values)
+            logits = torch.nn.functional.interpolate(predictions, size=pixel_values.shape[2:], mode="bilinear", align_corners=False)
+    
+            for metric in self.metrics:
+                name = f"val/{metric.get_name()}"
+                if name not in metric_dict.keys():
+                    metric_dict[name] = []
+                metric_dict[name].append(metric(logits, labels))
+
+            if step == 0:
+                color_map = logits.argmax(dim=1)
+                color_map = visualize_map(pixel_values.cpu(), color_map.squeeze().cpu())
+                metric_dict["Segmentation Map"] = generate_grid(pixel_values.cpu(), color_map)
+        
+        for metric in self.metrics:
+            name = f"val/{metric.get_name()}"
+            metric_dict[name] = np.mean(metric_dict[name])
+        
+        self.logger.log_wandb(metric_dict)
 
     

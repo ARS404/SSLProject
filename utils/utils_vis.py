@@ -1,12 +1,41 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+import torch
 
-# map every class to a random color
-ID_2_COLOR = {k: list(np.random.choice(range(256), size=3)) for k,v in id2label.items()}
+
+id2label = {
+    0: "background"
+    1: "aeroplane", 
+    2: "bicycle", 
+    3: "bird", 
+    4: "boat", 
+    5: "bottle", 
+    6: "bus", 
+    7: "car", 
+    8: "cat", 
+    9: "chair", 
+    10: "cow", 
+    11: "diningtable", 
+    12: "dog", 
+    13: "horse", 
+    14: "motorbike", 
+    15: "person", 
+    16: "potted plant", 
+    17: "sheep", 
+    18: "sofa", 
+    19: "train", 
+    20: "tv/monitor"
+}
+
+id2color = {k: list(np.random.choice(range(256), size=3)) for k,v in id2label.items()}
+
 
 def visualize_map(image, segmentation_map):
-    color_seg = np.zeros((segmentation_map.shape[0], segmentation_map.shape[1], 3), dtype=np.uint8) # height, width, 3
-    for label, color in ID_2_COLOR.items():
+    color_seg = np.zeros(
+        (segmentation_map[0], segmentation_map.shape[1], segmentation_map.shape[2], 3), 
+        dtype=np.uint8
+    ) # height, width, 3
+    for label, color in id2color.items():
         color_seg[segmentation_map == label, :] = color
 
     # Show image + mask
@@ -16,3 +45,16 @@ def visualize_map(image, segmentation_map):
     plt.figure(figsize=(15, 10))
     plt.imshow(img)
     plt.show()
+
+
+def generate_grid(source, vis_map):
+    num_images = source.shape[0] # batch size
+    width = 224; height = 224; rows = 2
+        
+    grid_image = torch.zeros((3, num_images*height, rows*width))
+    for i in range(num_images):
+        s = i*height
+        e = s + height
+        grid_image[:, s:e, :width] = source[i, :, :, :]
+        grid_image[:, s:e, 2*width:] = vis_map[i, :, :, :]
+    return grid_image
