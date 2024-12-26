@@ -3,6 +3,7 @@ import torchvision
 import torchvision.transforms as T
 
 from hydra.utils import instantiate
+from omegaconf import OmegaConf
 from torch.optim import AdamW
 from torch.utils.data import DataLoader
 from tqdm import tqdm
@@ -64,7 +65,10 @@ class Trainer(object):
             config.head
         ).to("cuda")
         self.optimizer = AdamW(self.model.parameters(), lr=5e-5) #TODO: add parametrization
-        self.losses = [instantiate(cfg) for cfg in config.train.losses]
+
+        self.losses = [
+            instantiate(cfg) for cfg in OmegaConf.to_container(config.train.losses).values()
+        ]
 
         self.logger  = instantiate(config.logger)
 

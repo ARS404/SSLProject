@@ -1,3 +1,4 @@
-_target_: train.losses.CrossEntropy
+cross_entropy:
+  _target_: train.losses.CrossEntropy
 
-weight: 1.0
+  weight: 1.0

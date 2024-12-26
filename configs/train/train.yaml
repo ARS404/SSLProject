@@ -1,4 +1,6 @@
 num_steps: 1000
 batch_size: 16
 
-losses: [cross_entropy]
+defaults:
+  - losses:
+    - cross_entropy
