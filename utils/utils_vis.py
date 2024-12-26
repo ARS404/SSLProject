@@ -67,7 +67,7 @@ def visualize_map(image, segmentation_map):
     return img
 
 
-def generate_grid(source, vis_map):
+def generate_grid(source, true_map, vis_map):
     num_images = source.shape[0] # batch size
     width = 224; height = 224; rows = 2
         
@@ -76,5 +76,6 @@ def generate_grid(source, vis_map):
         s = i * height
         e = s + height
         grid_image[:, s:e, :width] = source[i, :, :, :]
-        grid_image[:, s:e, width:] = vis_map[i, :, :, :]
+        grid_image[:, s:e, width:2*width] = source[i, :, :, :]
+        grid_image[:, s:e, 2*width:] = vis_map[i, :, :, :]
     return grid_image
