@@ -1,4 +1,5 @@
 _target_: models.backbones.dinov2.DinoV2
 
+version: "l"
 freeze: true
 reshape: true
