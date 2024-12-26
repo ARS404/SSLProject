@@ -1,4 +1,4 @@
 miou:
-  - _target_: train.metrics.MIOU
+  _target_: train.metrics.MIOU
 
-  - num_classes: 21
+  num_classes: 21
