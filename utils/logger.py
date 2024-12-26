@@ -23,7 +23,7 @@ class Logger(object):
         self.wandb_log.update(values_dict)
 
     def flush_wandb(self) -> None:
-        if self.config.logging_wandb:
+        if self.use_wandb:
             wandb.log(self.wandb_dict)
         self.wandb_log.clear()
         self.step += 1
