@@ -52,20 +52,22 @@ class Trainer(object):
         self.val_batch_size = config.val.batch_size
         self.val_size = config.val.val_size
 
-        self.model = Segmentation(
-            config.backbone,
-            config.head
-        ).to("cuda")
-        self.optimizer = AdamW(self.model.parameters(), lr=5e-5) #TODO: add parametrization
-
-        self.logger  = instantiate(config.logger)
-
         self.train_dataloader = InfiniteDataLoader(
             "train", True, self.batch_size
         )
         self.val_dataloader = InfiniteDataLoader(
             "val", False, self.val_batch_size
         )
+
+        self.model = Segmentation(
+            config.backbone,
+            config.head
+        ).to("cuda")
+        self.optimizer = AdamW(self.model.parameters(), lr=5e-5) #TODO: add parametrization
+        self.losses = [instantiate(cfg) for cfg in config.train.losses]
+
+        self.logger  = instantiate(config.logger)
+
 
 
     def run_train(self):
