@@ -15,7 +15,7 @@ class DinoV2(nn.Module):
                 param.requires_grad = False
 
     def forward(self, images):
-        return self.model.get_intermediate_layers(images, 24, reshape=self.reshape)[0][:, 1:, :]
+        return self.model.get_intermediate_layers(images, 24, reshape=self.reshape)[0]
     
     def get_name(self):
         return f"DinoV2 {'(frozen)' if self.freeze else ''}"
