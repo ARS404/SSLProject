@@ -4,7 +4,7 @@ import wandb
 
 
 class Logger(object):
-    def __init__(self, logging, use_wandb):
+    def __init__(self, logging, use_wandb, run_name):
         self.logging = logging
         self.use_wandb = use_wandb
 
@@ -16,7 +16,7 @@ class Logger(object):
             wandb_key = os.environ.get('WANDB_KEY', None)
             assert wandb_key is not None, "You have to setup WANDB_KEY environment variable"
             wandb.login(key=wandb_key.strip())
-            wandb.init()
+            wandb.init(name=run_name)
    
     def log_wandb(self, values_dict: dict) -> None:
         if not self.use_wandb:

@@ -74,7 +74,9 @@ class Trainer(object):
             instantiate(cfg) for cfg in OmegaConf.to_container(config.train.losses).values()
         ]
 
-        self.logger  = instantiate(config.logger)
+        self.logger  = instantiate(
+            config.logger, run_name=f"{self.model.get_name()}"
+        )
 
 
     def run_train(self):

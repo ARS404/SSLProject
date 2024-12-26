@@ -19,3 +19,7 @@ class LinearClassifier(nn.Module):
         out = out.permute(0, 3, 1, 2)
         out = self.model(out)
         return out
+    
+
+    def get_name(self):
+        return "Linear Classifier"

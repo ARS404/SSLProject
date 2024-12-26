@@ -14,3 +14,6 @@ class Segmentation(nn.Module):
         out = self.backbone(images)
         out = self.head(out)
         return out
+    
+    def get_name(self):
+        return f"{self.backbone.get_name()}_{self.head.get_name()}"
