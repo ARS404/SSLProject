@@ -1,0 +1,3 @@
+_target_: metrics.miou.MIOU
+
+num_classes: 21
