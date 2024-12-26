@@ -1,0 +1,5 @@
+_target_: models.heads.linear_classifier.LinearClassifier
+
+in_channels: 1024
+tokenW: 32
+tokenH: 32

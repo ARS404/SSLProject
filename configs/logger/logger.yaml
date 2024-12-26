@@ -1,0 +1,4 @@
+_target_: utils.logger.Logger
+
+logging: true
+use_wandb: true
