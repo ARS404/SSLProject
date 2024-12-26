@@ -4,8 +4,9 @@ import wandb
 
 
 class Logger(object):
-    def __init__(self, config):
-        self.config = config
+    def __init__(self, logging, use_wandb):
+        self.logging = logging
+        self.use_wandb = use_wandb
 
         self.wandb_log = {}
 
