@@ -39,12 +39,11 @@ def visualize_map(image, segmentation_map):
         color_seg[segmentation_map == label, :] = color
 
     # Show image + mask
+    image = image.permute(0, 3, 1, 2)
     img = np.array(image) * 0.5 + color_seg * 0.5
     img = img.astype(np.uint8)
 
-    plt.figure(figsize=(15, 10))
-    plt.imshow(img)
-    plt.show()
+    return img
 
 
 def generate_grid(source, vis_map):

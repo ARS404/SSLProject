@@ -93,9 +93,6 @@ class Trainer(object):
             
             self.logger.flush_wandb()
             torch.cuda.empty_cache()
-            
-            
-
 
     def _train_step(self):
         self.model.train()
