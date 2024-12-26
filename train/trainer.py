@@ -94,7 +94,7 @@ class Trainer(object):
         batch = self.train_dataloader.__next__()
     
         pixel_values = batch[0].to("cuda")
-        labels = batch[1].astype("long").to("cuda")
+        labels = batch[1].to("cuda")
 
         predictions = self.model(pixel_values)
         logits = torch.nn.functional.interpolate(predictions, size=pixel_values.shape[2:], mode="bilinear", align_corners=False)
