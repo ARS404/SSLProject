@@ -16,6 +16,7 @@ class Logger(object):
             wandb_key = os.environ.get('WANDB_KEY', None)
             assert wandb_key is not None, "You have to setup WANDB_KEY environment variable"
             wandb.login(key=wandb_key.strip())
+            wandb.init()
    
     def log_wandb(self, values_dict: dict) -> None:
         if not self.use_wandb:
