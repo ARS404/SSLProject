@@ -140,6 +140,7 @@ class Trainer(object):
                 color_map = logits.argmax(dim=1)
                 color_map = visualize_map(pixel_values.cpu(), color_map.squeeze().cpu())
                 image_grid = generate_grid(pixel_values.cpu(), color_map)
+                image_grid = np.transpose(image_grid, (1, 2, 0))
                 image_grid = wandb.Image(image_grid)
                 metric_dict["Segmentation Map"] = image_grid
         
