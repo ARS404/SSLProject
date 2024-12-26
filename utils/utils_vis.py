@@ -69,7 +69,7 @@ def visualize_map(image, segmentation_map):
 
 def generate_grid(source, true_map, vis_map):
     num_images = source.shape[0] # batch size
-    width = 224; height = 224; rows = 2
+    width = 224; height = 224; rows = 3
         
     grid_image = np.zeros((3, num_images*height, rows*width))
     for i in range(num_images):
