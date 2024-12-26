@@ -30,4 +30,4 @@ class Upsample(nn.Module):
     
 
     def get_name(self):
-        return "Linear Classifier"
+        return "Upsample"
