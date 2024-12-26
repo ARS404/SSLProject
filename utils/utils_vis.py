@@ -26,7 +26,7 @@ id2label = {
     20: "tv/monitor"
 }
 
-id2color =np.array([
+id2color = np.array([
     [0, 0, 0],
     [128, 0, 0],
     [0, 128, 0],
@@ -58,7 +58,7 @@ def visualize_map(image, segmentation_map):
     ) # batch, height, width, 3
     # seg map batch, h, w
     for label, color in enumerate(id2color):
-        color_seg[segmentation_map == label+1, :] = color
+        color_seg[segmentation_map == label, :] = color
 
     # Show image + mask
     color_seg = color_seg.transpose(0, 3, 1, 2)
