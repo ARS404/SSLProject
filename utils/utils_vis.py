@@ -50,7 +50,7 @@ def generate_grid(source, vis_map):
     num_images = source.shape[0] # batch size
     width = 224; height = 224; rows = 2
         
-    grid_image = torch.zeros((3, num_images*height, rows*width))
+    grid_image = np.zeros((3, num_images*height, rows*width))
     for i in range(num_images):
         s = i*height
         e = s + height
