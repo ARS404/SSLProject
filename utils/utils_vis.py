@@ -53,8 +53,8 @@ def generate_grid(source, vis_map):
         
     grid_image = np.zeros((3, num_images*height, rows*width))
     for i in range(num_images):
-        s = i*height
+        s = i * height
         e = s + height
         grid_image[:, s:e, :width] = source[i, :, :, :]
-        grid_image[:, s:e, 2*width:] = vis_map[i, :, :, :]
+        grid_image[:, s:e, width:] = vis_map[i, :, :, :]
     return grid_image
