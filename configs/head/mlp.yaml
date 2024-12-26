@@ -1,4 +1,4 @@
-_target_: models.heads.linear_classifier.LinearClassifier
+_target_: models.heads.mlp.MLP
 
 in_channels: 1024
 tokenW: 16

@@ -1,7 +1,7 @@
 import torch.nn as nn
 
 
-class mlMLP(nn.Module):
+class MLP(nn.Module):
     def __init__(self, in_channels, tokenW, tokenH, num_labels, hidden_dim, h=224, w=224):
         super().__init__()
 
