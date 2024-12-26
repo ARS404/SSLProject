@@ -94,11 +94,12 @@ class Trainer(object):
         labels = batch[1].to("cuda")
 
         predictions = self.model(pixel_values)
+        logits = torch.nn.functional.interpolate(predictions, size=pixel_values.shape[2:], mode="bilinear", align_corners=False)
 
         total_loss = 0
         loss_dict = {}
         for loss in self.losses:
-            loss_val = loss(predictions, labels)
+            loss_val = loss(logits, labels)
             total_loss  = total_loss + loss_val
             loss_dict[loss.get_name()] = loss_val
         
