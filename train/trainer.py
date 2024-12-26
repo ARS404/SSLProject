@@ -20,6 +20,7 @@ class InfiniteDataLoader(object):
             root="data", 
             download=True, 
             transform=transforms,
+            target_transform=transforms,
             image_set=split
         )
         self.dataloader = DataLoader(
