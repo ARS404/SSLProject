@@ -17,11 +17,15 @@ class InfiniteDataLoader(object):
             T.Resize((224, 224)),
             T.ToTensor()
         ])
+        t_transforms = T.Compose([
+            T.Resize((224, 224)),
+            T.PILToTensor()
+        ])
         self.dataset = torchvision.datasets.VOCSegmentation(
             root="data", 
             download=True, 
             transform=transforms,
-            target_transform=transforms,
+            target_transform=t_transforms,
             image_set=split
         )
         self.dataloader = DataLoader(
@@ -90,7 +94,7 @@ class Trainer(object):
         batch = self.train_dataloader.__next__()
     
         pixel_values = batch[0].to("cuda")
-        labels = batch[1].to("cuda")
+        labels = batch[1].astype("long").to("cuda")
 
         predictions = self.model(pixel_values)
         logits = torch.nn.functional.interpolate(predictions, size=pixel_values.shape[2:], mode="bilinear", align_corners=False)

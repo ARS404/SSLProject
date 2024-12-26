@@ -6,8 +6,8 @@ class CrossEntropy(object):
         self.weight = weight
         self.loss_fn = torch.nn.CrossEntropyLoss(ignore_index=0)
 
-    def __call__(self, predicted, labels):
-        loss = self.loss_fn(predicted.squeeze(), labels.squeeze())
+    def __call__(self, logits, labels):
+        loss = self.loss_fn(logits.squeeze(), labels.squeeze())
         loss = loss * self.weight
         return loss
     
