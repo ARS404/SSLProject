@@ -13,21 +13,22 @@ class MLP(nn.Module):
         self.num_labels = num_labels
 
         self.model = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(
-                self.height * self.width * self.in_channels,
-                hidden_dim
+            nn.Conv2d(
+                in_channels,
+                hidden_dim,
+                (1, 1)
             ),
             nn.ReLU(),
-            nn.Linear(
+            nn.Conv2d(
                 hidden_dim,
-                h * w * num_labels
+                num_labels,
+                (1, 1)
             )
         )
 
     def forward(self, embeddings):
         out = self.model(embeddings)
-        out = out.reshape(-1, self.num_labels, self.h, self.w)
+        out = nn.functional.interpolate(out, size=(224, 224), mode="bilinear", align_corners=False)
         return out
     
 
