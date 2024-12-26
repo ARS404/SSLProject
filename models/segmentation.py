@@ -16,4 +16,4 @@ class Segmentation(nn.Module):
         return out
     
     def get_name(self):
-        return f"{self.backbone.get_name()}_{self.head.get_name()}"
+        return f"{self.backbone.get_name()} + {self.head.get_name()}"

@@ -106,8 +106,8 @@ class Trainer(object):
         pixel_values = batch[0].to("cuda")
         labels = batch[1].type(torch.LongTensor).to("cuda")
 
-        predictions = self.model(pixel_values)
-        logits = torch.nn.functional.interpolate(predictions, size=pixel_values.shape[2:], mode="bilinear", align_corners=False)
+        logits = self.model(pixel_values)
+        # logits = torch.nn.functional.interpolate(predictions, size=pixel_values.shape[2:], mode="bilinear", align_corners=False)
 
         total_loss = 0
         loss_dict = {}
@@ -131,8 +131,8 @@ class Trainer(object):
             pixel_values = batch[0].to("cuda")
             labels = batch[1].type(torch.LongTensor).to("cuda")
 
-            predictions = self.model(pixel_values)
-            logits = torch.nn.functional.interpolate(predictions, size=pixel_values.shape[2:], mode="bilinear", align_corners=False)
+            logits = self.model(pixel_values)
+            # logits = torch.nn.functional.interpolate(predictions, size=pixel_values.shape[2:], mode="bilinear", align_corners=False)
     
             for metric in self.metrics:
                 name = f"val/{metric.get_name()}"
