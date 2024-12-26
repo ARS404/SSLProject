@@ -1,0 +1,3 @@
+_target_: train.losses.CrossEntropy
+
+weight: 1.0
