@@ -124,7 +124,7 @@ class Trainer(object):
         metric_dict = {}
         for step in range(0, self.val_size, self.val_batch_size):
             batch = self.val_dataloader.__next__()
-            pixel_values = batch[0].to("cuda")
+            pixel_values = (batch[0] * 255).to("cuda")
             labels = batch[1].type(torch.LongTensor).to("cuda")
 
             predictions = self.model(pixel_values)
