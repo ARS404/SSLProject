@@ -27,6 +27,7 @@ class InfiniteDataLoader(object):
             batch_size=batch_size,
             shuffle=shuffle
         )
+        self.iterator = iter(self.dataloader)
 
     def __iter__(self):
         return self
