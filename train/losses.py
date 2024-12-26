@@ -10,4 +10,7 @@ class CrossEntropy(object):
         loss = self.loss_fn(predicted.squeeze(), labels.squeeze())
         loss = loss * self.weight
         return loss
+    
+    def get_name(self):
+        return f"Cross Entropy (lambda = {self.weight})"
         
