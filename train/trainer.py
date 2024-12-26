@@ -69,7 +69,6 @@ class Trainer(object):
         self.logger  = instantiate(config.logger)
 
 
-
     def run_train(self):
 
         for step in tqdm(range(self.num_steps)):
