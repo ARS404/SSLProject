@@ -2,7 +2,6 @@ num_steps: 1000
 batch_size: 16
 
 defaults:
+  - optim: adam
   - losses:
     - cross_entropy
-  - optim: 
-    - adam
