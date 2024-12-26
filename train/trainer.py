@@ -75,7 +75,7 @@ class Trainer(object):
             config.head
         ).to("cuda")
 
-        self.optimizer = instantiate(config.optim, params=torch.nn.Linear(10, 1).parameters())
+        self.optimizer = instantiate(config.optim, params=self.model.parameters())
 
         self.losses = [
             instantiate(cfg) for cfg in OmegaConf.to_container(config.train.losses).values()
