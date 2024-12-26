@@ -74,7 +74,8 @@ class Trainer(object):
             config.backbone,
             config.head
         ).to("cuda")
-        self.optimizer = AdamW(self.model.parameters(), lr=1e-3) #TODO: add parametrization
+        # self.optimizer = AdamW(self.model.parameters(), lr=1e-3) #TODO: add parametrization
+        self.optimizer = instantiate(config.train.optim, params=self.model.parameters())
 
         self.losses = [
             instantiate(cfg) for cfg in OmegaConf.to_container(config.train.losses).values()
