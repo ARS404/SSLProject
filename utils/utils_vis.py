@@ -76,6 +76,6 @@ def generate_grid(source, true_map, vis_map):
         s = i * height
         e = s + height
         grid_image[:, s:e, :width] = source[i, :, :, :]
-        grid_image[:, s:e, width:2*width] = source[i, :, :, :]
+        grid_image[:, s:e, width:2*width] = true_map[i, :, :, :]
         grid_image[:, s:e, 2*width:] = vis_map[i, :, :, :]
     return grid_image
