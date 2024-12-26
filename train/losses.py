@@ -22,7 +22,7 @@ class DiceLoss(object):
 
     def __call__(self, logits, labels):
         batch_size, channels = logits.shape[:2]
-        predicted = logits.view(batch_size, channels, -1)
+        predict = logits.view(batch_size, channels, -1)
         target = labels.view(batch_size, 1, -1)
 
         predict = F.softmax(predict, dim=1)
