@@ -20,6 +20,7 @@ VERSION_TO_LAYERS = {
 class DinoV2(nn.Module):
     def __init__(self, freeze, reshape, version):
         super().__init__()
+        self.short_v = version
         self.version = f"dinov2_vit{version}14_reg"
         self.model = torch.hub.load('facebookresearch/dinov2', self.version).cuda()
 
@@ -43,4 +44,4 @@ class DinoV2(nn.Module):
         return VERSION_TO_CHANNELS[self.version]
 
     def get_name(self):
-        return f"DinoV2 {'(frozen)' if self.freeze else ''}"
+        return f"DinoV2-{self.short_v} {'(frozen)' if self.freeze else ''}"
