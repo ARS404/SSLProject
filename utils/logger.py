@@ -24,6 +24,6 @@ class Logger(object):
 
     def flush_wandb(self) -> None:
         if self.use_wandb:
-            wandb.log(self.wandb_dict)
+            wandb.log(self.wandb_log)
         self.wandb_log.clear()
         self.step += 1

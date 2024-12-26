@@ -104,7 +104,7 @@ class Trainer(object):
         for loss in self.losses:
             loss_val = loss(logits, labels)
             total_loss  = total_loss + loss_val
-            loss_dict[loss.get_name()] = loss_val
+            loss_dict[f"train/{loss.get_name()}"] = loss_val
         
 
         self.logger.log_wandb(loss_dict)
