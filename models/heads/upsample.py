@@ -12,7 +12,7 @@ class Upsample(nn.Module):
         self.model = nn.ConvTranspose2d(
             in_channels,
             num_labels,
-            kernel_size=8,
+            kernel_size=16,
             stride=8
         )
 
