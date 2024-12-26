@@ -57,8 +57,8 @@ def visualize_map(image, segmentation_map):
         dtype=np.uint8
     ) # batch, height, width, 3
     # seg map batch, h, w
-    for label, color in id2color.items():
-        color_seg[segmentation_map == label, :] = color
+    for label, color in enumerate(id2color):
+        color_seg[segmentation_map == label+1, :] = color
 
     # Show image + mask
     color_seg = color_seg.transpose(0, 3, 1, 2)
