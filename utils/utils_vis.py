@@ -43,7 +43,6 @@ def visualize_map(image, segmentation_map):
     color_seg = color_seg.transpose(0, 3, 1, 2)
     img = np.array(image) * 0.5 + color_seg * 0.5
     img = img.astype(np.uint8)      # [batch, channels, h, w]
-
     return img
 
 

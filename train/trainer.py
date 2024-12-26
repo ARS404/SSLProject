@@ -1,6 +1,7 @@
 import torch
 import torchvision
 import torchvision.transforms as T
+import wandb
 
 from hydra.utils import instantiate
 from omegaconf import OmegaConf
@@ -138,7 +139,9 @@ class Trainer(object):
             if step == 0:
                 color_map = logits.argmax(dim=1)
                 color_map = visualize_map(pixel_values.cpu(), color_map.squeeze().cpu())
-                metric_dict["Segmentation Map"] = generate_grid(pixel_values.cpu(), color_map)
+                image_grid = generate_grid(pixel_values.cpu(), color_map)
+                image_grid = wandb.Image(image_grid)
+                metric_dict["Segmentation Map"] = image_grid
         
         for metric in self.metrics:
             name = f"val/{metric.get_name()}"
