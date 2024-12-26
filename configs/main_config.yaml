@@ -1,6 +1,6 @@
 defaults:
   - backbone: dinov2
-  - head: linear
+  - head: mlp
   - logger: logger
   - train: train
   - val: val
