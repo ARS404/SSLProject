@@ -85,8 +85,8 @@ class Trainer(object):
         self.model.train()
         batch = self.train_dataloader.__next__()
     
-        pixel_values = batch["pixel_values"].to("cuda")
-        labels = batch["labels"].to("cuda")
+        pixel_values = batch[0].to("cuda")
+        labels = batch[1].to("cuda")
 
         predictions = self.model(pixel_values)
 
