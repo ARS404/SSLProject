@@ -16,10 +16,7 @@ class DinoV2(nn.Module):
 
     def forward(self, images):
         out = self.model.get_intermediate_layers(images, [20, 21, 22, 23], reshape=self.reshape)
-        print(len(out))
-        print(out[0].shape)
         out = torch.cat(out, dim=1)
-        print(out.shape)
         return out
     
     def get_name(self):

@@ -1,4 +1,4 @@
 _target_: models.backbones.dinov2.DinoV2
 
 freeze: true
-reshape: false
+reshape: true
