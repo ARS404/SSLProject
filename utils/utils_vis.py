@@ -4,7 +4,7 @@ import torch
 
 
 id2label = {
-    0: "background"
+    0: "background",
     1: "aeroplane", 
     2: "bicycle", 
     3: "bird", 
