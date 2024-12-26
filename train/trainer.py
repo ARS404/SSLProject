@@ -19,15 +19,19 @@ class InfiniteDataLoader(object):
             T.Resize((224, 224)),
             T.ToTensor()
         ])
+        def tmp(x):
+            x[x == 255] = 0
+            return x
         t_transforms = T.Compose([
             T.Resize((224, 224)),
-            T.PILToTensor()
+            T.PILToTensor(),
+            tmp
         ])
         self.dataset = torchvision.datasets.VOCSegmentation(
             root="data", 
             download=True, 
             transform=transforms,
-            target_transform=transforms,
+            target_transform=t_transforms,
             image_set=split
         )
         self.dataloader = DataLoader(
