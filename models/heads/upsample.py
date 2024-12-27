@@ -31,29 +31,15 @@ class Upsample(nn.Module):
             ),
             nn.ConvTranspose2d( #128
                 self.hidden_dim,
-                self.hidden_dim,
+                self.num_labels,
                 kernel_size=4,
                 stride=2
             ),
         ])
-        self.final = nn.ConvTranspose2d(
-            self.hidden_dim,
-            self.num_labels,
-            kernel_size=4,
-            stride=2
-        )
 
     def forward(self, embeddings):
         out = self.model(embeddings)
-        out = self.final(
-            out,
-            output_size=torch.Size([
-                embeddings.shape[0], 
-                self.num_labels,
-                224,
-                224
-            ])
-        )
+        out = nn.functional.interpolate(out, size=(224, 224), mode="bilinear", align_corners=False)
         return out
     
 
