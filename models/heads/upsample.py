@@ -22,13 +22,13 @@ class Upsample(nn.Module):
             nn.Conv2d(
                 in_channels=self.hidden_dim,
                 out_channels=self.hidden_dim,
-                kernel_size=8,
+                kernel_size=9,
                 stride=1,
                 padding="same"
             )
         )
         
-        self.block1 = nn.Sequential(
+        self.block2 = nn.Sequential(
             nn.ConvTranspose2d(
                 in_channels=self.hidden_dim,
                 out_channels=self.num_labels,
@@ -39,7 +39,7 @@ class Upsample(nn.Module):
             nn.Conv2d(
                 in_channels=self.num_labels,
                 out_channels=self.num_labels,
-                kernel_size=8,
+                kernel_size=9,
                 stride=1,
                 padding="same"
             )
