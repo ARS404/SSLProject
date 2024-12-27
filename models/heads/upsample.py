@@ -13,7 +13,7 @@ class Upsample(nn.Module):
             in_channels,
             num_labels,
             kernel_size=16,
-            stride=8
+            stride=16
         )
 
     def forward(self, embeddings):
