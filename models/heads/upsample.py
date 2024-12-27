@@ -17,19 +17,15 @@ class Upsample(nn.Module):
                 kernel_size=4,
                 stride=2
             ),
-            nn.ConvTranspose2d( #32
+            nn.ReLU(),
+            nn.ConvTranspose2d( # 32
                 self.hidden_dim,
                 self.hidden_dim,
                 kernel_size=4,
                 stride=2
             ),
-            nn.ConvTranspose2d( #64
-                self.hidden_dim,
-                self.hidden_dim,
-                kernel_size=4,
-                stride=2
-            ),
-            nn.ConvTranspose2d( #128
+            nn.ReLU(),
+            nn.ConvTranspose2d( # 64
                 self.hidden_dim,
                 self.num_labels,
                 kernel_size=4,
