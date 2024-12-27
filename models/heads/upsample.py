@@ -10,24 +10,23 @@ class Upsample(nn.Module):
         self.in_channels = in_channels
         self.num_labels = num_labels
 
-        self.model = nn.Sequential(
-            nn.ConvTranspose2d(
-                in_channels,
-                self.hidden_dim,
-                kernel_size=8,
-                stride=4
-            ),
-            nn.ReLU(),
-            nn.ConvTranspose2d(
-                self.hidden_dim,
-                self.num_labels,
-                kernel_size=8,
-                stride=4
-            ),
+        self.upconv1 = nn.ConvTranspose2d(
+            in_channels,
+            self.hidden_dim,
+            kernel_size=8,
+            stride=4
+        )
+        self.upconv2 = nn.ConvTranspose2d(
+            self.hidden_dim,
+            self.num_labels,
+            kernel_size=8,
+            stride=4
         )
 
     def forward(self, embeddings):
-        out = self.model(embeddings)
+        out = self.upconv1(embeddings)
+        out = nn.functional.interpolate(out, size=(112, 112), mode="bilinear", align_corners=False)
+        out = self.upconv2(out)
         out = nn.functional.interpolate(out, size=(224, 224), mode="bilinear", align_corners=False)
         return out
     
