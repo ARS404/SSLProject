@@ -10,48 +10,46 @@ class Upsample(nn.Module):
         self.in_channels = in_channels
         self.num_labels = num_labels
 
-        self.upconv1 = nn.ConvTranspose2d(
-            in_channels,
-            self.hidden_dim,
-            kernel_size=4,
-            stride=2
+
+        self.block1 = nn.Sequential(
+            nn.ConvTranspose2d(
+                in_channels=in_channels,
+                out_channels=self.hidden_dim,
+                kernel_size=9,
+                stride=4
+            ),
+            nn.ReLU(),
+            nn.Conv2d(
+                in_channels=self.hidden_dim,
+                out_channels=self.hidden_dim,
+                kernel_size=8,
+                stride=1,
+                padding="same"
+            )
         )
-        self.upconv2 = nn.ConvTranspose2d(
-            self.hidden_dim,
-            self.hidden_dim,
-            kernel_size=6,
-            stride=3
-        )
-        self.upconv3 = nn.ConvTranspose2d(
-            self.hidden_dim,
-            self.hidden_dim,
-            kernel_size=6,
-            stride=3
-        )
-        self.upconv4 = nn.ConvTranspose2d(
-            self.hidden_dim,
-            self.num_labels,
-            kernel_size=8,
-            stride=4
-        )
-        self.final = nn.Conv2d(
-            self.num_labels,
-            self.num_labels,
-            kernel_size=7,
-            stride=1,
-            padding="same"
+        
+        self.block1 = nn.Sequential(
+            nn.ConvTranspose2d(
+                in_channels=self.hidden_dim,
+                out_channels=self.num_labels,
+                kernel_size=9,
+                stride=4
+            ),
+            nn.ReLU(),
+            nn.Conv2d(
+                in_channels=self.num_labels,
+                out_channels=self.num_labels,
+                kernel_size=8,
+                stride=1,
+                padding="same"
+            )
         )
 
     def forward(self, embeddings):
-        out = self.upconv1(embeddings)
-        out = nn.functional.interpolate(out, size=(28, 28), mode="bilinear", align_corners=False)
-        out = self.upconv2(out)
-        out = nn.functional.interpolate(out, size=(56, 56), mode="bilinear", align_corners=False)
-        out = self.upconv3(out)
+        out = self.block1(embeddings)
         out = nn.functional.interpolate(out, size=(112, 112), mode="bilinear", align_corners=False)
-        out = self.upconv4(out)
+        out = self.block2(out)
         out = nn.functional.interpolate(out, size=(224, 224), mode="bilinear", align_corners=False)
-        out = self.final(out)
         return out
     
 
