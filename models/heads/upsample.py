@@ -34,6 +34,13 @@ class Upsample(nn.Module):
             kernel_size=8,
             stride=4
         )
+        self.final = nn.Conv2d(
+            self.num_labels,
+            self.num_labels,
+            kernel_size=7,
+            stride=1,
+            padding="same"
+        )
 
     def forward(self, embeddings):
         out = self.upconv1(embeddings)
@@ -44,6 +51,7 @@ class Upsample(nn.Module):
         out = nn.functional.interpolate(out, size=(112, 112), mode="bilinear", align_corners=False)
         out = self.upconv4(out)
         out = nn.functional.interpolate(out, size=(224, 224), mode="bilinear", align_corners=False)
+        out = self.final(out)
         return out
     
 
