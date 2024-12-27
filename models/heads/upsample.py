@@ -11,25 +11,18 @@ class Upsample(nn.Module):
         self.num_labels = num_labels
 
         self.model = nn.Sequential(
-            nn.ConvTranspose2d( # 16
+            nn.ConvTranspose2d(
                 in_channels,
                 self.hidden_dim,
-                kernel_size=4,
-                stride=2
+                kernel_size=8,
+                stride=4
             ),
             nn.ReLU(),
-            nn.ConvTranspose2d( # 32
-                self.hidden_dim,
-                self.hidden_dim,
-                kernel_size=4,
-                stride=2
-            ),
-            nn.ReLU(),
-            nn.ConvTranspose2d( # 64
+            nn.ConvTranspose2d(
                 self.hidden_dim,
                 self.num_labels,
-                kernel_size=4,
-                stride=2
+                kernel_size=8,
+                stride=4
             ),
         )
 
