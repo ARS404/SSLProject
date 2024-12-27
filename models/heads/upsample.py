@@ -15,7 +15,7 @@ class Upsample(nn.Module):
             nn.ConvTranspose2d(
                 in_channels=in_channels,
                 out_channels=self.hidden_dim,
-                kernel_size=9,
+                kernel_size=12,
                 stride=4
             ),
         )
@@ -24,17 +24,9 @@ class Upsample(nn.Module):
             nn.ConvTranspose2d(
                 in_channels=self.hidden_dim,
                 out_channels=self.num_labels,
-                kernel_size=9,
+                kernel_size=12,
                 stride=4
             ),
-            nn.ReLU(),
-            nn.Conv2d(
-                in_channels=self.num_labels,
-                out_channels=self.num_labels,
-                kernel_size=3,
-                stride=1,
-                padding="same"
-            )
         )
 
     def forward(self, embeddings):
