@@ -12,8 +12,8 @@ class Upsample(nn.Module):
         self.model = nn.ConvTranspose2d(
             in_channels,
             num_labels,
-            kernel_size=28,
-            stride=14
+            kernel_size=26,
+            stride=12
         )
 
     def forward(self, embeddings):
