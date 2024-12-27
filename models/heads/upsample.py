@@ -16,7 +16,7 @@ class Upsample(nn.Module):
                 in_channels=in_channels,
                 out_channels=self.hidden_dim,
                 kernel_size=12,
-                stride=4
+                stride=6
             ),
         )
         
@@ -25,7 +25,7 @@ class Upsample(nn.Module):
                 in_channels=self.hidden_dim,
                 out_channels=self.num_labels,
                 kernel_size=12,
-                stride=4
+                stride=6
             ),
         )
 
