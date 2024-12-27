@@ -10,7 +10,7 @@ class Upsample(nn.Module):
         self.in_channels = in_channels
         self.num_labels = num_labels
 
-        self.model = nn.Sequential([
+        self.model = nn.Sequential(
             nn.ConvTranspose2d( # 16
                 in_channels,
                 self.hidden_dim,
@@ -35,7 +35,7 @@ class Upsample(nn.Module):
                 kernel_size=4,
                 stride=2
             ),
-        ])
+        )
 
     def forward(self, embeddings):
         out = self.model(embeddings)
