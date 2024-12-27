@@ -15,7 +15,7 @@ class Upsample(nn.Module):
             nn.ConvTranspose2d(
                 in_channels=in_channels,
                 out_channels=self.hidden_dim,
-                kernel_size=12,
+                kernel_size=15,
                 stride=6
             ),
         )
@@ -24,7 +24,7 @@ class Upsample(nn.Module):
             nn.ConvTranspose2d(
                 in_channels=self.hidden_dim,
                 out_channels=self.num_labels,
-                kernel_size=12,
+                kernel_size=15,
                 stride=6
             ),
         )
